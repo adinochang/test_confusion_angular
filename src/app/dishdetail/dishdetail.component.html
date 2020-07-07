@@ -33,13 +33,13 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <mat-grid-list>
+        <mat-list>
           <mat-list-item *ngFor="let dishComment of dish.comments">
-            <p matLine>{{ dishComment.comment }}</p>
+            <h4 matLine>{{ dishComment.comment }}</h4>
             <p matLine>{{ dishComment.rating }} stars</p>
             <p matLine>-- {{ dishComment.author }} {{ dishComment.date | date: 'MMM dd,yyyy' }}</p>
           </mat-list-item>
-        </mat-grid-list>
+        </mat-list>
       </mat-card-content>
       <mat-card-actions>
       </mat-card-actions>
