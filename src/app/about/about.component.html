@@ -72,6 +72,9 @@
               </div>
           </mat-list-item>
         </mat-list>
+        <div [hidden]="leaders">
+          <mat-spinner></mat-spinner> <h4>Loading...</h4>
+        </div>
       </mat-card-content>
       <mat-card-actions>
       </mat-card-actions>
