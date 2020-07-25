@@ -10,15 +10,27 @@ import { DISHES } from '../shared/dishes';
 export class DishService {
   constructor() { }
 
-  getDishes() {
-    return DISHES;
+  getDishes() : Promise<Dish[]> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(DISHES)
+        }, 1000); // simulate server latency
+    });
   }
 
-  getDish(id) {
-    return DISHES.filter( (dish) => dish.id === id )[0];
+  getDish(id) : Promise<Dish>  {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(DISHES.filter( (dish) => dish.id === id )[0])
+      }, 1000); // simulate server latency
+    });
   }
 
-  getFeaturedDish() {
-    return DISHES.filter( (dish) => dish.featured )[0];
+  getFeaturedDish() : Promise<Dish> {
+    return new Promise( (resolve) => {
+      setTimeout( () => {
+        resolve(DISHES.filter( (dish) => dish.featured )[0])
+      }, 1000);
+    });
   }
 }
