@@ -54,7 +54,45 @@
             <p matLine>{{ dishComment.rating }} stars</p>
             <p matLine>-- {{ dishComment.author }} {{ dishComment.date | date: 'MMM dd,yyyy' }}</p>
           </mat-list-item>
+          <mat-list-item id="comment-preview" *ngIf="commentsForm.status == 'VALID'">
+            <h4 matLine>{{ commentsForm.value.comment }}</h4>
+            <p matLine>{{ commentsForm.value.rating }} stars</p>
+            <p matLine>-- {{ commentsForm.value.author }}</p>
+          </mat-list-item>
         </mat-list>
+      </mat-card-content>
+      <mat-card-content>
+        <div fxFlex fxFlexOffset="20px" class="form-size">
+          <h3>Enter a New Comment</h3>
+
+          <form novalidate [formGroup]="commentsForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+            <p>
+              <mat-form-field class="full-width">
+                <input matInput formControlName="author" placeholder="Name" type="text" required>
+                <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
+              </mat-form-field>
+            </p>
+            <table class="form-size">
+              <tr>
+                <td>
+                  <mat-slider formControlName="rating" min="1" max="5" step="1" tickInterval="1" thumbLabel="true"></mat-slider>
+                  <mat-error *ngIf="formErrors.rating">{{formErrors.rating}}</mat-error>
+                </td>
+              </tr>
+            </table>
+            <p>
+              <mat-form-field class="full-width">
+                <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+                <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+              </mat-form-field>
+            </p>
+            <button type="submit" mat-button
+                    [disabled]="commentsForm.status == 'INVALID'"
+                    class="background-primary text-floral-white">
+              Submit
+            </button>
+          </form>
+        </div>
       </mat-card-content>
       <mat-card-actions>
       </mat-card-actions>
