@@ -62,7 +62,7 @@
       </mat-card-header>
       <mat-card-content>
         <mat-list>
-          <mat-list-item *ngFor="let leader of leaders">
+          <mat-list-item *ngFor="let leader of leaders" [@expand]>
               <div class="div-about-image">
                 <img src="{{ leader.image }}" class="about-image">
               </div>

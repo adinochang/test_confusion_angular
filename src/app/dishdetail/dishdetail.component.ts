@@ -11,11 +11,18 @@ import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Comment } from "../shared/comment";
 
+import { flyInOut, visibility, expand } from "../animations/app.animation";
+
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;',
+  },
+  animations: [ visibility(), flyInOut(), expand() ]
 })
 
 
@@ -31,6 +38,7 @@ export class DishdetailComponent implements OnInit {
   next: string;
 
   errMess: string;
+  visibility = 'shown';
 
   commentsForm: FormGroup;
   comment: Comment;
@@ -78,12 +86,16 @@ export class DishdetailComponent implements OnInit {
     );
 
     this.route.params.pipe(
-      switchMap((params: Params) => this.dishService.getDish(params['id'])))
+      switchMap((params: Params) => {
+        this.visibility = 'hidden';
+        return this.dishService.getDish(params['id']);
+      }))
       .subscribe(
         dish => {
           this.dish = dish;
           this.dishcopy = dish;
           this.setPrevNext(dish.id);
+          this.visibility = 'shown';
         },
         errmess => this.errMess = <any>errmess
         );
