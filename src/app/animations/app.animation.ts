@@ -5,9 +5,15 @@ export function visibility() {
   return trigger('visibility', [
     state('shown', style({
       transform: 'scale(1.0)',
+      display: 'block',
       opacity: 1,
     })),
     state('hidden', style({
+      transform: 'scale(0.5)',
+      opacity: 0,
+    })),
+    state('display_none', style({
+      display: 'none',
       transform: 'scale(0.5)',
       opacity: 0,
     })),
